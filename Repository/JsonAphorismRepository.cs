@@ -18,17 +18,21 @@ namespace WingedWords.Repository
         public List<Aphorism> GetAll()
         {
             if (!File.Exists(_filePath))
-                return new List<Aphorism>();
+            {
+                // Якщо файл не існує — створюємо з тестовими даними
+                var seed = SeedData.GetSeedAphorisms();
+                Save(seed);
+                return seed;
+            }
 
             try
             {
                 string json = File.ReadAllText(_filePath);
                 return JsonSerializer.Deserialize<List<Aphorism>>(json, _options)
-                       ?? new List<Aphorism>();
+                    ?? new List<Aphorism>();
             }
             catch
             {
-                // Якщо файл пошкоджений  повертаємо порожній список
                 return new List<Aphorism>();
             }
         }
