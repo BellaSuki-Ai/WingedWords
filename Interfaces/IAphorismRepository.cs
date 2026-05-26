@@ -1,5 +1,10 @@
-public interface IAphorismRepository
+using WingedWords.Models;
+
+namespace WingedWords.Interfaces
 {
-    List<Aphorism> GetAll();
-    void Save(List<Aphorism> aphorisms);
+    public interface IAphorismRepository
+    {
+        List<Aphorism> GetAll();
+        void Save(List<Aphorism> aphorisms);
+    }
 }
